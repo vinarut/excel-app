@@ -14,6 +14,19 @@ class Dom {
     return this.$el.outerHTML.trim()
   }
 
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value
+    }
+
+    return this.$el.textContent
+  }
+
   clear() {
     this.html('')
     return this
@@ -45,12 +58,32 @@ class Dom {
     return this.$el.dataset
   }
 
+  isNotEmpty() {
+    return !!this.$el
+  }
+
+  id(parse) {
+    if (parse) {
+      const [row, col] = this.id().split(':')
+      return {
+        row: +row,
+        col: +col
+      }
+    }
+
+    return this.data.id
+  }
+
   closest(selector) {
     return $(this.$el.closest(selector))
   }
 
   getCoords() {
     return this.$el.getBoundingClientRect()
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector))
   }
 
   findAll(selector) {
@@ -61,6 +94,21 @@ class Dom {
     Object
         .entries(styles)
         .forEach(([prop, value]) => this.$el.style[prop] = value)
+  }
+
+  addClass(className) {
+    this.$el.classList.add(className)
+    return this
+  }
+
+  removeClass(className) {
+    this.$el.classList.remove(className)
+    return this
+  }
+
+  focus() {
+    this.$el.focus()
+    return this
   }
 }
 
