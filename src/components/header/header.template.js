@@ -1,9 +1,8 @@
-import {defaultTitle} from '@/constants'
-
 function toButton(button) {
+  const meta = `data-type="${button.type}"`
   return `
-    <div class="button">
-      <i class="material-icons">${button.icon}</i>
+    <div class="button" ${meta}>
+      <i class="material-icons" ${meta}>${button.icon}</i>
     </div>
   `
 }
@@ -11,10 +10,12 @@ function toButton(button) {
 export function createHeader(store) {
   const buttons = [
     {
-      icon: 'delete'
+      icon: 'delete',
+      type: 'del'
     },
     {
-      icon: 'exit_to_app'
+      icon: 'exit_to_app',
+      type: 'exit'
     }
   ].map(toButton).join('')
 
@@ -22,7 +23,7 @@ export function createHeader(store) {
     <input 
       type="text" 
       class="input" 
-      value="${store.title || defaultTitle}" 
+      value="${store.title}" 
     />
 
     <div>
