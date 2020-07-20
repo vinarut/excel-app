@@ -21,8 +21,12 @@ export function storage(key, data = null) {
   localStorage.setItem(key, JSON.stringify(data))
 }
 
+export function storageName(params) {
+  return 'excel:' + params
+}
+
 export function removeFromStorage(key) {
-  localStorage.removeItem(key)
+  localStorage.removeItem(storageName(key))
 }
 
 export function isEqual(a, b) {

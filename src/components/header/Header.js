@@ -5,7 +5,6 @@ import {changeTitle} from '@/redux/actions'
 import {isDelete, isExit} from '@/components/header/header.functions'
 import {ActiveRoute} from '@core/router/ActiveRoute'
 import {removeFromStorage} from '@core/utils'
-import {storageName} from '@/pages/ExcelPage'
 
 export class Header extends ExcelComponent {
   static className = 'excel__header'
@@ -30,7 +29,7 @@ export class Header extends ExcelComponent {
     if (isDelete(event) &&
         confirm('Вы действительно хотите удалить эту таблицу?')
     ) {
-      removeFromStorage(storageName(ActiveRoute.param))
+      removeFromStorage(ActiveRoute.param)
       ActiveRoute.changeRoute('#dashboard')
     } else if (isExit(event)) {
       ActiveRoute.changeRoute('#dashboard')
